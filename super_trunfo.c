@@ -1,5 +1,6 @@
 #include <stdio.h>
 
+// Variaveis globais para armazenar os dados das cartas e exibição.
 char estado_1, estado_2;
 char codigo_1[3], codigo_2[3];
 char nome_cidade_1[50], nome_cidade_2[50];
@@ -8,6 +9,7 @@ float area_1, area_2;
 float pib_1, pib_2;
 int qtd_pontos_turisticos_1, qtd_pontos_turisticos_2;
 
+// Função para exibir os dados das cartas.
 void exibirTrunfo()
 {
     printf("Carta 1: \n");
@@ -30,6 +32,7 @@ void exibirTrunfo()
 
 }
 
+// Função para coletar os dados das cartas.
 void coletarDados()
 {
 
@@ -68,6 +71,8 @@ void coletarDados()
 
 
 }
+
+// Função principal do programa que chama coleta e exibição dos dados.
 int main()
 {
   coletarDados();

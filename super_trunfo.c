@@ -7,8 +7,8 @@ char codigo_1[3];
 char codigo_2[3];
 char nome_cidade_1[50]; 
 char nome_cidade_2[50];
-int populacao_1, populacao_2;
-float area_1, area_2;
+unsigned long int populacao_1, populacao_2;
+float area_1, area_2;   
 float pib_1, pib_2;
 int qtd_pontos_turisticos_1, qtd_pontos_turisticos_2;
 // Funções para calcular densidade populacional e PIB per capita.
@@ -19,11 +19,15 @@ float calcularDensidade(int populacao, float area) {
 float calcularPibPerCapita(float pib, int populacao) {
     return (float) pib / populacao;
 }
+// Função para calcular o Super poder.
+float calcularSuperPoder(int populacao, float area, float pib, int qtd_pontos, float pib_per_capita, float densidade) {
+return (populacao + area + pib + qtd_pontos + pib_per_capita - densidade);
 
+}
 // Função para exibir os dados das cartas.
 void exibirTrunfo()
 {
-   printf("\nCarta 1: \n");
+    printf("\nCarta 1: \n");
     printf("Estado: %c\n", estado_1);
     printf("Codigo: %c%s\n", estado_1, codigo_1);
     printf("Nome da cidade: %s\n", nome_cidade_1);
@@ -33,6 +37,8 @@ void exibirTrunfo()
     printf("Quantidade de pontos turisticos: %d\n", qtd_pontos_turisticos_1);
     printf("Densidade populacional: %.2f habitantes/Km\n", calcularDensidade(populacao_1, area_1));
     printf("PIB per capita: %.2f\n", calcularPibPerCapita(pib_1, populacao_1));
+    printf("Super poder: %.2f\n", calcularSuperPoder(populacao_1, area_1, pib_1, qtd_pontos_turisticos_1, calcularPibPerCapita(pib_1, populacao_1), calcularDensidade(populacao_1, area_1)));
+
 
     printf("\nCarta 2: \n");
     printf("Estado: %c\n", estado_2);
@@ -44,10 +50,20 @@ void exibirTrunfo()
     printf("Quantidade de pontos turisticos: %d\n", qtd_pontos_turisticos_2);
     printf("Densidade populacional: %.2f habitantes/Km\n", calcularDensidade(populacao_2, area_2));
     printf("PIB per capita: %.2f\n", calcularPibPerCapita(pib_2, populacao_2));
+    printf("Super poder: %.2f\n", calcularSuperPoder(populacao_2, area_2, pib_2, qtd_pontos_turisticos_2, calcularPibPerCapita(pib_2, populacao_2), calcularDensidade(populacao_2, area_2)));
 
 }
-
-// Função para coletar os dados das cartas.
+//  Função para comparar os atributos das cartas.
+void exibirComparacaoDeAtributos(){
+    printf ("Comparação das cartas:\n");
+    printf ("População: Carta 1 venceu(%d)\n", populacao_1 > populacao_2);   
+    printf ("Área: Carta 1 venceu(%d)\n",area_1 > area_2);
+    printf ("PIB: Carta 1 venceu(%d)\n",pib_1 > pib_2);
+    printf ("Pontos Turisticos: Carta 1 venceu(%d)\n",qtd_pontos_turisticos_1 > qtd_pontos_turisticos_2);
+    printf ("Densidade Populacional: Carta 1 venceu(%d)\n",calcularDensidade(populacao_1, area_1) < calcularDensidade(populacao_2, area_2));
+    printf ("PIB per capita: Carta 1 venceu(%d)\n",calcularPibPerCapita(pib_1, populacao_1) > calcularPibPerCapita(pib_2, populacao_2));
+    printf ("Super Poder: Carta 1 venceu(%d)\n",calcularSuperPoder(populacao_1, area_1, pib_1, qtd_pontos_turisticos_1, calcularPibPerCapita(pib_1, populacao_1), calcularDensidade(populacao_1, area_1)) > calcularSuperPoder(populacao_2, area_2, pib_2, qtd_pontos_turisticos_2, calcularPibPerCapita(pib_2, populacao_2), calcularDensidade(populacao_2, area_2)));
+}
 void coletarDados()
 {
 
@@ -85,8 +101,6 @@ void coletarDados()
     scanf(" %f", &pib_2);
     printf("\nDigite a quantidade de pontos turisticos:\n");
     scanf(" %d", &qtd_pontos_turisticos_2);
-
-
 }
 
 // Função principal do programa que chama coleta e exibição dos dados.
@@ -94,5 +108,6 @@ int main()
 {
   coletarDados();
   exibirTrunfo();
-    return 0;
+  exibirComparacaoDeAtributos();
+  return 0;
 }

@@ -11,6 +11,7 @@ unsigned long int populacao_1, populacao_2;
 float area_1, area_2;   
 float pib_1, pib_2;
 int qtd_pontos_turisticos_1, qtd_pontos_turisticos_2;
+
 // Funções para calcular densidade populacional e PIB per capita.
 float calcularDensidade(int populacao, float area) {
     return (float) populacao / area;    
@@ -19,6 +20,7 @@ float calcularDensidade(int populacao, float area) {
 float calcularPibPerCapita(float pib, int populacao) {
     return (float) pib / populacao;
 }
+
 // Função para calcular o Super poder.
 float calcularSuperPoder(int populacao, float area, float pib, int qtd_pontos, float pib_per_capita, float densidade) {
 return (populacao + area + pib + qtd_pontos + pib_per_capita - densidade);
@@ -53,6 +55,7 @@ void exibirTrunfo()
     printf("Super poder: %.2f\n", calcularSuperPoder(populacao_2, area_2, pib_2, qtd_pontos_turisticos_2, calcularPibPerCapita(pib_2, populacao_2), calcularDensidade(populacao_2, area_2)));
 
 }
+
 //  Função para comparar os atributos das cartas.
 void exibirComparacaoDeAtributos(){
     printf ("Comparação das cartas:\n");
@@ -66,7 +69,7 @@ void exibirComparacaoDeAtributos(){
 }
 void coletarDados()
 {
-
+// Função para coletar os dados das cartas.
     printf("Bem-vindo ao jogo de cartas Super Trunfo\n");
     printf(" Vamos preencher os dados da carta 1\n");
     printf("Digite um estado de A a H: ");
@@ -84,7 +87,6 @@ void coletarDados()
     printf("\nDigite a quantidade de pontos turisticos:\n");
     scanf(" %d", &qtd_pontos_turisticos_1);
   
-    
 
     printf("\nAgora vamos preencher os dados da carta 2\n");
     printf("Digite um estado de A a H:\n");
@@ -103,11 +105,29 @@ void coletarDados()
     scanf(" %d", &qtd_pontos_turisticos_2);
 }
 
+// Função para comparar atributos das cartas.
+void compararAtributos() {
+
+    printf("Comparação de cartas:(Atributo: Área):\n");
+    printf ("Carta 1 - %s, %s, %f\n", estado_1, nome_cidade_1, area_1);
+    printf ("Carta 2 - %s, %s, %f\n", estado_2, nome_cidade_2, area_2);
+
+// Comparação do atributo área, utilizando if, else if e else.
+    if (area_1 > area_2) {
+        printf("Carta 1 venceu!\n");
+    } else if (area_1 < area_2) {
+        printf("Carta 2 venceu!\n");
+    } else {
+        printf("Empate!\n");
+    }
+}
+
 // Função principal do programa que chama coleta e exibição dos dados.
 int main()
 {
   coletarDados();
   exibirTrunfo();
   exibirComparacaoDeAtributos();
+  compararAtributos();
   return 0;
 }

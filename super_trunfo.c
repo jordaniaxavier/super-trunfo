@@ -104,7 +104,98 @@ void coletarDados()
     printf("\nDigite a quantidade de pontos turisticos:\n");
     scanf(" %d", &qtd_pontos_turisticos_2);
 }
+// Função para gerar o menu interativo.
+int gerarMenuInterativo() {
+    int opcao;
+    printf("Atributo das cartas Super Trunfo. \n");
+    printf("1 - População \n");
+    printf("2 - Área \n");
+    printf("3 - PIB \n");
+    printf("4 - Pontos Turisticos \n");
+    printf("5 - Densidade Populacional \n");
+    printf("6 - Verificar as regras do jogo \n");
+    printf("Escolha uma opção: ");
+    scanf("%d", &opcao);
+    return opcao;
 
+}
+// Função para comparar os atributos escolhidos pelo usuário.
+void compararAtributosEscolhidos(int opcao) {
+    switch (opcao) {
+        case 1:
+        printf ("Você escolheu comparar o atributo População:\n");
+        printf ("Carta 1 - %s,%d\n", nome_cidade_1, populacao_1);
+        printf ("Carta 2 - %s,%d\n", nome_cidade_2, populacao_2);
+        if (populacao_1 > populacao_2) {
+            printf("Carta 1 venceu!\n");
+        } else if (populacao_1 < populacao_2) {
+            printf("Carta 2 venceu!\n");
+        } else {
+            printf("Empate!\n");
+        }
+        break;
+        case 2:
+        printf ("Você escolheu comparar o atributo Área:\n");
+        printf ("Carta 1 - %s,%f\n", nome_cidade_1, area_1);
+        printf ("Carta 2 - %s,%f\n", nome_cidade_2, area_2);
+        if (area_1 > area_2) {
+            printf("Carta 1 venceu!\n");
+        } else if (area_1 < area_2) {
+            printf("Carta 2 venceu!\n");
+        } else {
+            printf("Empate!\n");
+        }
+        break;
+        case 3:
+        printf ("Você escolheu comparar o atributo PIB:\n");
+        printf ("Carta 1 - %s,%f\n", nome_cidade_1, pib_1);
+        printf ("Carta 2 - %s,%f\n", nome_cidade_2, pib_2);
+        if (pib_1 > pib_2) {
+            printf("Carta 1 venceu!\n");
+        } else if (pib_1 < pib_2) {
+            printf("Carta 2 venceu!\n");
+        } else {
+            printf("Empate!\n");
+        }
+        break;
+        case 4:
+        printf ("Você escolheu comparar o atributo Pontos Turisticos:\n");
+        printf ("Carta 1 - %s,%d\n", nome_cidade_1, qtd_pontos_turisticos_1);
+        printf ("Carta 2 - %s,%d\n", nome_cidade_2, qtd_pontos_turisticos_2);
+        if (qtd_pontos_turisticos_1 > qtd_pontos_turisticos_2) {
+            printf("Carta 1 venceu!\n");
+        } else if (qtd_pontos_turisticos_1 < qtd_pontos_turisticos_2) {
+            printf("Carta 2 venceu!\n");
+        } else {
+            printf("Empate!\n");
+        }
+        break;
+        case 5:
+        printf ("Você escolheu comparar o atributo Densidade Populacional:\n");
+        printf ("Carta 1 - %s,%.2f\n", nome_cidade_1, calcularDensidade(populacao_1, area_1));
+        printf ("Carta 2 - %s,%.2f\n", nome_cidade_2, calcularDensidade(populacao_2, area_2));
+        if (calcularDensidade(populacao_1, area_1) < calcularDensidade(populacao_2, area_2)) {
+            printf("Carta 1 venceu!\n");
+        } else if (calcularDensidade(populacao_1, area_1) > calcularDensidade(populacao_2, area_2)) {
+            printf("Carta 2 venceu!\n");
+        } else {
+            printf("Empate!\n");
+        }
+        break;
+        case 6:
+        printf ("Regras do jogo Super Trunfo:\n");
+        printf ("1 - Cada carta representa uma cidade com atributos específicos.\n");
+        printf ("2 - Os jogadores escolhem um atributo para comparar entre as cartas.\n");
+        printf ("3 - A carta com o maior valor no atributo escolhido vence, exceto no caso de Densidade Populacional, a regra inverte: vence a carta com menor valor.\n");  
+        printf ("4 - Em caso de empate, nenhuma carta vence.\n");
+        gerenciarJogo();
+        break;
+        default:
+        printf ("Opção inválida!\n");
+        break;
+
+    }
+}
 // Função para comparar atributos das cartas.
 void compararAtributos() {
 
@@ -121,13 +212,16 @@ void compararAtributos() {
         printf("Empate!\n");
     }
 }
+void gerenciarJogo() {
+    int opcao = gerarMenuInterativo();
+    compararAtributosEscolhidos(opcao);
+}
 
 // Função principal do programa que chama coleta e exibição dos dados.
 int main()
 {
-  coletarDados();
-  exibirTrunfo();
-  exibirComparacaoDeAtributos();
-  compararAtributos();
+coletarDados();
+exibirTrunfo();
+gerenciarJogo();
   return 0;
 }
